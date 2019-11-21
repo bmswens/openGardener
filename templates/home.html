@@ -1,0 +1,46 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="container" style="padding:10px">
+    <div class="row" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>openGardener</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col" style="padding: 5px;">
+                            <img src="{{ latest_image }}" width="{{ width }}" height="{{ height }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <table style="border: 1px solid black;">
+                                <tr>
+                                    <th style="border: 1px solid black; padding: 5px;">Datetime</th>
+                                    <th style="border: 1px solid black; padding: 5px;">Dry</th>
+                                    <th style="border: 1px solid black; padding: 5px;">Watered</th>
+                                    <th style="border: 1px solid black; padding: 5px;">Photo</th>
+                                </tr>
+                                {% for row in logs %}
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 5px;">{{ row.datetime }}</td>
+                                    <td style="border: 1px solid black; padding: 5px;">{{ row.dry }}</td>
+                                    <td style="border: 1px solid black; padding: 5px;">{{ row.watered }}</td>
+                                    {% if row.photo %}
+                                    <td style="border: 1px solid black; padding: 5px;"><a href="api/img/{{ row.photo_path }}">Link</a></td>
+                                    {% else %}
+                                    <td style="border: 1px solid black; padding: 5px;">None</td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

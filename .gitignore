@@ -1,0 +1,4 @@
+*venv
+*.yml*
+logs
+.idea

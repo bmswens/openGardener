@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>openGardener</title>
+    <link rel="icon" type="image/png" href="/static/img/logo.png">
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery.slim.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<!-- Navbar -->
+<div class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/"><img src="/static/img/logo.png" height="50" width="50"></a>
+  <ul class="nav mr-auto">
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown=toggle" href="" id="logsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+              <h3>Logs</h3>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="logsDropdown">
+              <a class="dropdown-item" href="/logs/text">Text Logs</a>
+              <a class="dropdown-item" href="/logs/photos">Photo Logs</a>
+        </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/settings" style="color:white;"><h3>Settings</h3></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#" style="color:white;"><h3>About</h3></a>
+      </li>
+  </ul>
+</div>
+<!-- /Navbar -->
+
+<!-- Body -->
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+<!-- /Body -->
+
+<footer>
+<div class="container-fluid">
+  <div class="row" style="background-color: #eee;" align="center">
+    <div class="col-md-4">
+      <h4>Find us on:</h4>
+      <a href="#">
+          <img src="/static/img/github.png" height="50" width="50">
+      </a>
+      <a href="#">
+          <img src="/static/img/trello.png" height="50" width="50">
+      </a>
+      <br>
+    </div>
+    <div class="col-md-4">
+      <h4>Useful Links:</h4>
+    </div>
+    <div class="col-md-4">
+      <h4>Contact Us:</h4>
+      <p>
+        <a href="mailto:bmswens@gmail.com">Email</a><br>
+      </p>
+    </div>
+  </div>
+</div>
+</footer>

@@ -1,0 +1,130 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="container">
+    <form method="post">
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Moisture Sensor</h1>
+                </div>
+                <div class="card-body" align="left">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="moisture_sensor.enabled" id="moistureEnabled">
+                        <label class="form-check-label" for="moistureEnabled">Enabled</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="moistureFrequency">Frequency</label>
+                        <input type="text" class="form-control" placeholder="15" name="moisture_sensor.frequency" id="moistureFrequency">
+                        <small class="form-text text-muted">In HH:MM format.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="moisturePin">Sensor Pin</label>
+                        <select class="form-control" name="moisture_sensor.pin" id="moisturePin">
+                            <option>11</option>
+                            <option>13</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>18</option>
+                            <option>22</option>
+                            <option>29</option>
+                            <option>31</option>
+                            <option>32</option>
+                            <option>33</option>
+                            <option>36</option>
+                            <option>37</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Pump</h1>
+                </div>
+                <div class="card-body" align="left">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="pump.enabled" id="pumpEnabled">
+                        <label class="form-check-label" for="pumpEnabled">Enabled</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="pumpFrequency">Frequency</label>
+                        <input type="text" class="form-control" placeholder="15" name="pump.frequency" id="pumpFrequency">
+                        <small class="form-text text-muted">Either in HH:MM format, or "when dry"</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="pumpDuration">Duration</label>
+                        <input type="text" class="form-control" placeholder="3" name="pump.duration" id="pumpDuration">
+                        <small class="form-text text-muted">In seconds</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="pumpPin">Pump Pin</label>
+                        <select class="form-control" name="pump.pin" id="pumpPin">
+                            <option>11</option>
+                            <option>13</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>18</option>
+                            <option>22</option>
+                            <option>29</option>
+                            <option>31</option>
+                            <option>32</option>
+                            <option>33</option>
+                            <option>36</option>
+                            <option>37</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Camera</h1>
+                </div>
+                <div class="card-body" align="left">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="camera.enabled" id="cameraEnabled">
+                        <label class="form-check-label" for="cameraEnabled">Enabled</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="cameraFrequency">Frequency</label>
+                        <input type="text" class="form-control" placeholder="15" name="camera.frequency" id="cameraFrequency">
+                        <small class="form-text text-muted">Either in HH:MM format, or "when dry", or "on pump"</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cameraResolution">Resolution</label>
+                        <select class="form-control" name="camera.resolution" id="cameraResolution">
+                            <option>1920x1080</option>
+                            <option>1280x720</option>
+                            <option>640x480</option>
+                            <option>3280x2464</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cameraRotation">Rotation</label>
+                        <select class="form-control" name="camera.rotation" id="cameraRotation">
+                            <option>0</option>
+                            <option>90</option>
+                            <option>180</option>
+                            <option>270</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <input type="submit" class="btn btn-secondary btn-lg">
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock %}
