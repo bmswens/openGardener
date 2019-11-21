@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/bmswens/openGardener/master/static/img/logo.png" alt="logo" width="200">
+
 # openGardener
 
 A project for automatically taking care of plants in your house.
