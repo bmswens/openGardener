@@ -21,8 +21,8 @@ def home():
     logs.reverse()
     latest_image = None
     final_logs = []
-    width = ''
-    height = ''
+    width = '640'
+    height = '360'
     for row in logs:
         if row.get('photo'):
             row['photo_path'] = row['photo'][row['photo'].find('plant/') + 6:]
@@ -30,7 +30,7 @@ def home():
                 latest_image = '/static/img/plant/' + row['photo'][row['photo'].find('plant/') + 6:]
         if len(final_logs) < 5:
             final_logs.append(row)
-    if not latest_image:
+    if not latest_image or latest_image == '/static/img/plant/':
         latest_image = '/static/img/logo.png'
         width = '400'
         height = '400'
@@ -62,7 +62,8 @@ def image_logs():
             photo = '/static/img/plant/' + row['photo'][row['photo'].find('plant/') + 6:]
             if len(photos[-1]) == 5:
                 photos.append([])
-            photos[-1].append(photo)
+            if photo != '/static/img/plant/':
+                photos[-1].append(photo)
     return flask.render_template('photos.html', photos=photos)
 
 
