@@ -84,13 +84,17 @@ def settings():
     if config and 'camera' in config:
         config['camera']['resolution'] = '{width}x{height}'.format(width=config['camera']['resolution'][0],
                                                                    height=config['camera']['resolution'][1])
-    print(config)
     return flask.render_template(page, HOST=HOST, config=config)
 
 
 @webapp.route('/api/img/<image>')
 def serve_image(image):
     return flask.send_from_directory('static/img/plant', image)
+
+
+@webapp.route('/about')
+def about():
+    return flask.render_template('about.html')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,93 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="container" style="padding:10px">
+    <div class="row" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>General</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col" align="left">
+                            <h3 align="center">Origin</h3>
+                            <p align="left">
+                                This project came about due to my wife asking me to water her plants while she was away.
+                                The issue that I ran it to was that I would water them every other day, as instructed,
+                                but the plants were slowly dying. To this day I do not know if this was because I
+                                watered them too much, or too little.
+                                <br>
+                                <br>
+                                My remedy to this was to automate as much of it as I can. I started by purchasing a
+                                Raspberry Pi development board, a moisture sensor for soil, and a small water pump. I
+                                used the Raspberry Pi's built in GPIO to get the moisture sensor's reading on moisture
+                                level, and have it trigger the pump when it was dry. Once that was working, I branched
+                                out from there.
+                            </p>
+                            <h3 align="center">Future</h3>
+                            <p align="left">
+                                This section will contain generalized long term goals, in no specific order.
+                                <br>
+                                For specific feature implementation, or to submit an idea for developement, please check
+                                out <a href="https://github.com/bmswens/openGardener" target="_blank"> our Github</a>.
+                            </p>
+                            <ul>
+                                <li>Computer Vision
+                                    <ul>
+                                        <li>Detect number of plants</li>
+                                        <li>Detect health of plants</li>
+                                        <li>Detect maturity of produce</li>
+                                        <li>Detect blooming of flowers</li>
+                                    </ul>
+                                </li>
+                                <li>Containerization</li>
+                                <li>Horizontal Scaling
+                                    <ul>
+                                        <li>API development to support communication</li>
+                                        <li>Proper databasing</li>
+                                    </ul>
+                                </li>
+                                <li>Light Sensor Support
+                                    <ul>
+                                        <li>Ability to turn on a sun lamp if low light levels during the day</li>
+                                    </ul>
+                                </li>
+                                <li>Water Level Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" align="center" style="padding-top: 5px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Technical</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Hardware</h3>
+                            <p align="left">
+                                Currently all hardware that this has been used on or tested with is located under the
+                                useful items link in the footer.
+                                <br>
+                                It has been tested on a Raspberry Pi 3 B+. It should work on all versions of the
+                                Raspberry Pi which support GPIO.
+                            </p>
+                            <h3>Software</h3>
+                            <p align="left">
+                                This software is open source and has been built in Python 3.5, as that is the default
+                                installation on the Raspberry Pi. This website was built utilizing the Flask framework.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
