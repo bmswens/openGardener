@@ -2,3 +2,5 @@
 *.yml*
 logs
 .idea
+static/js
+static/css

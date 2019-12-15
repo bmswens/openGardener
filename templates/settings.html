@@ -11,17 +11,28 @@
                 </div>
                 <div class="card-body" align="left">
                     <div class="form-group form-check">
+                        {% if config and config["moisture_sensor"]["enabled"] %}
+                        <input type="checkbox" class="form-check-input" name="moisture_sensor.enabled" id="moistureEnabled" checked>
+                        {% else %}
                         <input type="checkbox" class="form-check-input" name="moisture_sensor.enabled" id="moistureEnabled">
+                        {% endif %}
                         <label class="form-check-label" for="moistureEnabled">Enabled</label>
                     </div>
                     <div class="form-group">
                         <label for="moistureFrequency">Frequency</label>
-                        <input type="text" class="form-control" placeholder="15" name="moisture_sensor.frequency" id="moistureFrequency">
+                        {% if config and config["moisture_sensor"]["frequency"] %}
+                        <input type="text" class="form-control" value="{{ config["moisture_sensor"]["frequency"] }}" name="moisture_sensor.frequency" id="moistureFrequency">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="04:15" name="moisture_sensor.frequency" id="moistureFrequency">
+                        {% endif %}
                         <small class="form-text text-muted">In HH:MM format.</small>
                     </div>
                     <div class="form-group">
                         <label for="moisturePin">Sensor Pin</label>
                         <select class="form-control" name="moisture_sensor.pin" id="moisturePin">
+                            {% if config and config["moisture_sensor"]["pin"] %}
+                            <option>{{ config["moisture_sensor"]["pin"] }}</option>
+                            {% endif %}
                             <option>11</option>
                             <option>13</option>
                             <option>15</option>
@@ -48,22 +59,37 @@
                 </div>
                 <div class="card-body" align="left">
                     <div class="form-group form-check">
+                        {% if config and config["pump"]["enabled"] %}
+                        <input type="checkbox" class="form-check-input" name="pump.enabled" id="pumpEnabled" checked>
+                        {% else %}
                         <input type="checkbox" class="form-check-input" name="pump.enabled" id="pumpEnabled">
+                        {% endif %}
                         <label class="form-check-label" for="pumpEnabled">Enabled</label>
                     </div>
                     <div class="form-group">
                         <label for="pumpFrequency">Frequency</label>
-                        <input type="text" class="form-control" placeholder="15" name="pump.frequency" id="pumpFrequency">
+                        {% if config and config["pump"]["frequency"] %}
+                        <input type="text" class="form-control" value="{{ config["pump"]["frequency"] }}" name="pump.frequency" id="pumpFrequency">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="when dry" name="pump.frequency" id="pumpFrequency">
+                        {% endif %}
                         <small class="form-text text-muted">Either in HH:MM format, or "when dry"</small>
                     </div>
                     <div class="form-group">
                         <label for="pumpDuration">Duration</label>
+                        {% if config and config["pump"]["duration"] %}
+                        <input type="text" class="form-control" value="{{ config["pump"]["duration"] }}" name="pump.duration" id="pumpDuration">
+                        {% else %}
                         <input type="text" class="form-control" placeholder="3" name="pump.duration" id="pumpDuration">
+                        {% endif %}
                         <small class="form-text text-muted">In seconds</small>
                     </div>
                     <div class="form-group">
                         <label for="pumpPin">Pump Pin</label>
                         <select class="form-control" name="pump.pin" id="pumpPin">
+                            {% if config and config["pump"]["pin"] %}
+                            <option>{{ config["pump"]["pin"] }}</option>
+                            {% endif %}
                             <option>11</option>
                             <option>13</option>
                             <option>15</option>
@@ -90,17 +116,28 @@
                 </div>
                 <div class="card-body" align="left">
                     <div class="form-group form-check">
+                        {% if config and config["camera"]["enabled"] %}
+                        <input type="checkbox" class="form-check-input" name="camera.enabled" id="cameraEnabled" checked>
+                        {% else %}
                         <input type="checkbox" class="form-check-input" name="camera.enabled" id="cameraEnabled">
+                        {% endif %}
                         <label class="form-check-label" for="cameraEnabled">Enabled</label>
                     </div>
                     <div class="form-group">
                         <label for="cameraFrequency">Frequency</label>
-                        <input type="text" class="form-control" placeholder="15" name="camera.frequency" id="cameraFrequency">
+                        {% if config and config["camera"]["frequency"] %}
+                        <input type="text" class="form-control" value="{{ config["camera"]["frequency"] }}" name="camera.frequency" id="cameraFrequency">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="on pump" name="camera.frequency" id="cameraFrequency">
+                        {% endif %}
                         <small class="form-text text-muted">Either in HH:MM format, or "when dry", or "on pump"</small>
                     </div>
                     <div class="form-group">
                         <label for="cameraResolution">Resolution</label>
                         <select class="form-control" name="camera.resolution" id="cameraResolution">
+                            {% if config and config["camera"]["resolution"] %}
+                            <option>{{ config["camera"]["resolution"] }}</option>
+                            {% endif %}
                             <option>1920x1080</option>
                             <option>1280x720</option>
                             <option>640x480</option>
@@ -110,6 +147,9 @@
                     <div class="form-group">
                         <label for="cameraRotation">Rotation</label>
                         <select class="form-control" name="camera.rotation" id="cameraRotation">
+                            {% if config and config["camera"]["rotation"] %}
+                            <option>{{ config["camera"]["rotation"] }}</option>
+                            {% endif %}
                             <option>0</option>
                             <option>90</option>
                             <option>180</option>

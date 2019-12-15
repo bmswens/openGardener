@@ -80,7 +80,12 @@ def settings():
         with open('settings.yml', 'w') as output:
             output.write(settings_text)
         page = 'success.html'
-    return flask.render_template(page, HOST=HOST)
+    config = gardentools.get_config()
+    if config and 'camera' in config:
+        config['camera']['resolution'] = '{width}x{height}'.format(width=config['camera']['resolution'][0],
+                                                                   height=config['camera']['resolution'][1])
+    print(config)
+    return flask.render_template(page, HOST=HOST, config=config)
 
 
 @webapp.route('/api/img/<image>')

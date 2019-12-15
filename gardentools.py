@@ -14,9 +14,12 @@ BASE_DIR = os.path.split(os.path.realpath(__file__))[0]
 
 
 def get_config(f='settings.yml'):
-    with open(f) as in_file:
-        config = yaml.safe_load(in_file.read())
-    return config
+    try:
+        with open(f) as in_file:
+            config = yaml.safe_load(in_file.read())
+        return config
+    except FileNotFoundError:
+        return {}
 
 
 def log(dry, watered, photo=None, folder='{BASE_DIR}/logs'.format(BASE_DIR=BASE_DIR), f='logs.json'):
