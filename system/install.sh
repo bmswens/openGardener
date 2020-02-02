@@ -4,8 +4,7 @@ starting_directory=$(pwd)
 directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd ${directory}
 cd ..
-mkdir logs
-touch logs/logs.json
+touch opengardener.db
 # setup python3 venv
 python3 -m venv --system-site-packages venv
 . venv/bin/activate

@@ -23,7 +23,7 @@
                                     <td style="border: 1px solid black; padding: 5px;">{{ row.datetime }}</td>
                                     <td style="border: 1px solid black; padding: 5px;">{{ row.dry }}</td>
                                     <td style="border: 1px solid black; padding: 5px;">{{ row.watered }}</td>
-                                    {% if row.photo %}
+                                    {% if row.photo_path %}
                                     <td style="border: 1px solid black; padding: 5px;"><a href="api/img/{{ row.photo_path }}">Link</a></td>
                                     {% else %}
                                     <td style="border: 1px solid black; padding: 5px;">None</td>

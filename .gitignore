@@ -4,3 +4,4 @@ logs
 .idea
 static/js
 static/css
+*.db

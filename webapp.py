@@ -11,55 +11,40 @@ import flask
 import yaml
 
 webapp = flask.Flask(__name__)
-HOST = '127.0.0.1:8080'
+HOST = '192.168.0.30:8081'
 
 
 @webapp.route('/')
 def home():
-    with open('logs/logs.json') as in_file:
-        logs = [json.loads(line.replace('\n', '')) for line in in_file]
-    logs.reverse()
-    latest_image = None
-    final_logs = []
-    width = '640'
-    height = '360'
-    for row in logs:
-        if row.get('photo'):
-            row['photo_path'] = row['photo'][row['photo'].find('plant/') + 6:]
-            if not latest_image:
-                latest_image = '/static/img/plant/' + row['photo'][row['photo'].find('plant/') + 6:]
-        if len(final_logs) < 5:
-            final_logs.append(row)
+    with gardentools.Logs('opengardener.db') as db:
+        logs = db.get(5)
+        latest_image = db.get_latest_image()
+    height = ''
+    width = ''
     if not latest_image or latest_image == '/static/img/plant/':
         latest_image = '/static/img/logo.png'
         width = '400'
         height = '400'
-    return flask.render_template('home.html', HOST=HOST, logs=final_logs, latest_image=latest_image, width=width,
+    return flask.render_template('home.html', HOST=HOST, logs=logs, latest_image=latest_image, width=width,
                                  height=height)
 
 
 @webapp.route('/logs/text')
 def text_logs():
-    with open('logs/logs.json') as in_file:
-        logs = [json.loads(line.replace('\n', '')) for line in in_file]
-    logs.reverse()
-    final_logs = []
-    for row in logs:
-        if row.get('photo'):
-            row['photo_path'] = row['photo'][row['photo'].find('plant/') + 6:]
-        final_logs.append(row)
-    return flask.render_template('logs.html', HOST=HOST, logs=final_logs)
+    with gardentools.Logs() as db:
+        logs = db.get()
+    return flask.render_template('logs.html', HOST=HOST, logs=logs)
 
 
 @webapp.route('/logs/photos')
 def image_logs():
-    with open('logs/logs.json') as in_file:
-        logs = [json.loads(line.replace('\n', '')) for line in in_file]
-    logs.reverse()
+    with gardentools.Logs() as db:
+        logs = db.get()
+    logs = [log for log in logs if log.get('photo_path')]
     photos = [[]]
     for row in logs:
-        if row.get('photo'):
-            photo = '/static/img/plant/' + row['photo'][row['photo'].find('plant/') + 6:]
+        if row.get('photo_path'):
+            photo = row.get('photo_path')
             if len(photos[-1]) == 5:
                 photos.append([])
             if photo != '/static/img/plant/':

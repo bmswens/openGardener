@@ -30,8 +30,9 @@ def main():
     if config['camera']['enabled'] and config['camera']['frequency'] == 'on pump':
         photo = camera.take_picture()
     else:
-        photo = 'N/A'
-    gardentools.log('N/A', watered, photo)
+        photo = None
+    with gardentools.Logs('opengardener.db') as logs:
+        logs.write(watered=watered, photo_path=photo)
 
 
 if __name__ == '__main__':

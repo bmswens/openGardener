@@ -38,7 +38,8 @@ def take_picture(f=get_photo_path()):
 
 def main():
     picture = take_picture()
-    gardentools.log('N/A', 'N/A', picture)
+    with gardentools.Logs('opengardener.db') as logs:
+        logs.write(photo_path=picture)
 
 
 if __name__ == '__main__':

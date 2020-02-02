@@ -20,16 +20,17 @@ def main():
         if config['pump']['enabled'] and config['pump']['frequency'] == 'when dry':
             watered = pump.pump()
         else:
-            watered = 'N/A'
+            watered = None
         if config['camera']['enabled'] and config['pump']['frequency'] == 'when dry':
             photo = camera.take_picture()
         else:
             photo = None
     else:
         dry = False
-        watered = 'N/A'
+        watered = None
         photo = None
-    gardentools.log(dry, watered, photo)
+    with gardentools.Logs('opengardener.db') as db:
+        db.write(dry=dry, photo_path=photo, watered=watered)
 
 
 if __name__ == '__main__':

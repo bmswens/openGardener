@@ -1,9 +1,9 @@
 # The purpose of this file is to keep webapp.py more clean
 
 # standard
-import json
 import os
 import datetime
+import sqlite3
 
 # third party
 import yaml
@@ -13,6 +13,73 @@ NOW = datetime.datetime.now()
 BASE_DIR = os.path.split(os.path.realpath(__file__))[0]
 
 
+class Logs:
+
+    def __init__(self, path='opengardener.db'):
+        self.db = sqlite3.connect(path)
+        self.cursor = self.db.cursor()
+        self.columns = [
+            "datetime",
+            "dry",
+            "watered",
+            "photo_path"
+        ]
+
+        self.cursor.execute('CREATE TABLE IF NOT EXISTS garden_logs ('
+                            '{}, '
+                            '{} BOOLEAN, '
+                            '{} BOOLEAN, '
+                            '{} TEXT)'.format(*self.columns))
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.db.commit()
+        self.db.close()
+        return True
+
+    def write(self, **kwargs):
+        kwargs['datetime'] = datetime.datetime.now().isoformat()
+        data = [kwargs.get(column) for column in self.columns]
+        self.cursor.execute('INSERT INTO garden_logs VALUES (?, ?, ?, ?)', data)
+
+    def get(self, limit=None):
+        data = []
+        if limit:
+            query = 'SELECT * from garden_logs LIMIT {limit}'.format(limit=limit)
+        else:
+            query = 'SELECT * from garden_logs'
+        for row in self.cursor.execute(query):
+            record = {
+                'datetime': datetime.datetime.strptime(row[0], '%Y-%m-%dT%H:%M:%S.%f'),
+                'dry': bool(row[1]),
+                'watered': bool(row[2]),
+                'photo_path': self.clean_path(row[3])
+            }
+            data.append(record)
+        return data
+
+    @staticmethod
+    def clean_path(photo_path):
+        print(photo_path)
+        if photo_path:
+            print('return new path)')
+            return photo_path[photo_path.find('/static'):]
+        else:
+            return ''
+
+    def get_latest_image(self):
+        query = 'SELECT * FROM garden_logs WHERE photo_path IS NOT NULL LIMIT 1'
+        results = [path for path in self.cursor.execute(query)]
+        if not results:
+            return None
+        else:
+            row = results[0]
+            photo_path = self.clean_path(row[3])
+            return photo_path
+
+
 def get_config(f='settings.yml'):
     try:
         with open(f) as in_file:
@@ -20,20 +87,6 @@ def get_config(f='settings.yml'):
         return config
     except FileNotFoundError:
         return {}
-
-
-def log(dry, watered, photo=None, folder='{BASE_DIR}/logs'.format(BASE_DIR=BASE_DIR), f='logs.json'):
-    if not os.path.isdir(folder):
-        os.makedirs(folder)
-    logs = os.path.join(folder, f)
-    entry = {
-        'dry': dry,
-        'watered': watered,
-        'photo': photo,
-        'datetime': NOW.isoformat()
-    }
-    with open(logs, 'a') as output:
-        output.write(str(json.dumps(entry)) + '\n')
 
 
 def assign_type(value):
