@@ -17,7 +17,7 @@ curl -L https://github.com/twbs/bootstrap/releases/download/v4.0.0/bootstrap-4.0
 curl https://code.jquery.com/jquery-3.4.1.slim.min.js > js/jquery.slim.min.js
 curl https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js > js/popper.min.js
 curl https://www.stickpng.com/assets/images/5847f98fcef1014c0b5e48c0.png > img/github.png
-curl https://cdn.iconscout.com/icon/free/png-512/trello-1-432474.png > img/trello.png
+curl https://cdn4.iconfinder.com/data/icons/logos-and-brands-1/512/97_Docker_logo_logos-512.png > img/docker.png
 unzip bootstrap.zip
 cd ..
 # finalize our service file and copy it to systemd

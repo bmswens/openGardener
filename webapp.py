@@ -1,5 +1,4 @@
 # standard
-import json
 import shutil
 import os
 
@@ -11,7 +10,6 @@ import flask
 import yaml
 
 webapp = flask.Flask(__name__)
-HOST = '192.168.0.30:8081'
 
 
 @webapp.route('/')
@@ -25,7 +23,7 @@ def home():
         latest_image = '/static/img/logo.png'
         width = '400'
         height = '400'
-    return flask.render_template('home.html', HOST=HOST, logs=logs, latest_image=latest_image, width=width,
+    return flask.render_template('home.html', logs=logs, latest_image=latest_image, width=width,
                                  height=height)
 
 
@@ -33,7 +31,7 @@ def home():
 def text_logs():
     with gardentools.Logs() as db:
         logs = db.get()
-    return flask.render_template('logs.html', HOST=HOST, logs=logs)
+    return flask.render_template('logs.html', logs=logs)
 
 
 @webapp.route('/logs/photos')
@@ -69,7 +67,7 @@ def settings():
     if config and 'camera' in config:
         config['camera']['resolution'] = '{width}x{height}'.format(width=config['camera']['resolution'][0],
                                                                    height=config['camera']['resolution'][1])
-    return flask.render_template(page, HOST=HOST, config=config)
+    return flask.render_template(page, config=config)
 
 
 @webapp.route('/api/img/<image>')
@@ -83,4 +81,12 @@ def about():
 
 
 if __name__ == '__main__':
-    webapp.run(host=HOST.split(':')[0], port=HOST.split(':')[1])
+    if 'HOST' in os.environ:
+        host = os.environ['HOST']
+    else:
+        host = '0.0.0.0'
+    if 'PORT' in os.environ:
+        port = os.environ['PORT']
+    else:
+        port = '8080'
+    webapp.run(host=host, port=port)

@@ -23,11 +23,29 @@ All Python requirements can be found in ```requirements.txt```, but do not have 
 
 ### Installing
 
+#### Container
+
+The container can be pulled directly from [docker hub](https://hub.docker.com/repository/docker/bmswens/opengardener)
+or you can build it yourself using the supplied dockerfile.
+
+Recommended docker use:
+```
+docker run \
+-p 8080:8080 \
+-v host/path/to/database.sqlite3:/opt/openGardener/opengardener.db \
+-v host/path/to/picture_folder:/opt/openGardener/static/img/plant \
+-d \
+bmswens/opengardener
+```
+
+
+#### Direct Install
+
 Installation is designed to be easy, but does require root access.
 
 Before running anything as root, I recommend familiarizing yourself with the commands to be run.
 
-#### Steps
+##### Steps
 
 openGardener can be installed anywhere, but ```/opt``` is a very good place for it.
 
