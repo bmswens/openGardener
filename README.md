@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 This project is designed to be run on a Raspberry Pi and uses Raspberry Pi specific modules like RPi.GPIO and picamera.
 As such, it may not run correctly on other systems.
 
-All Python requirements can be found in ```requirements.txt```, but do not have to be reinstalled.
+All Python requirements can be found in ```requirements.txt```, but do not have to be preinstalled.
 
 ### Currently Supported Components
 
@@ -55,7 +55,8 @@ git clone https://github.com/bmswens/openGardener.git
 cd openGardener
 ```
 
-Modify the HOST setting in webapp.py to match the IP and port that you wish to host on.
+Modify the HOST setting in webapp.py to match the IP and port that you wish to host on, or set the HOST and PORT 
+environment variables.
 You may keep it as localhost if you only plan to access it locally, or are going to enable port forwarding. 
 
 ```
