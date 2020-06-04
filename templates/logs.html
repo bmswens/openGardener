@@ -13,21 +13,15 @@
                         <div class="col">
                             <table style="border: 1px solid black;">
                                 <tr>
-                                    <th style="border: 1px solid black; padding: 5px;">Datetime</th>
-                                    <th style="border: 1px solid black; padding: 5px;">Dry</th>
-                                    <th style="border: 1px solid black; padding: 5px;">Watered</th>
-                                    <th style="border: 1px solid black; padding: 5px;">Photo</th>
+                                    {% for header in headers %}
+                                    <th style="border: 1px solid black; padding: 5px;">{{ header|replace('_', ' ')|title  }}</th>
+                                    {% endfor %}
                                 </tr>
                                 {% for row in logs %}
                                 <tr>
-                                    <td style="border: 1px solid black; padding: 5px;">{{ row.datetime }}</td>
-                                    <td style="border: 1px solid black; padding: 5px;">{{ row.dry }}</td>
-                                    <td style="border: 1px solid black; padding: 5px;">{{ row.watered }}</td>
-                                    {% if row.photo_path %}
-                                    <td style="border: 1px solid black; padding: 5px;"><a href="api/img/{{ row.photo_path }}">Link</a></td>
-                                    {% else %}
-                                    <td style="border: 1px solid black; padding: 5px;">None</td>
-                                    {% endif %}
+                                    {% for header in headers %}
+                                    <td style="border: 1px solid black; padding: 5px;">{{ row[header] }}</td>
+                                    {% endfor %}
                                 </tr>
                                 {% endfor %}
                             </table>

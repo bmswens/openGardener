@@ -5,3 +5,4 @@ logs
 static/js
 static/css
 *.db
+__pycache__

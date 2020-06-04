@@ -22,13 +22,15 @@ class Logs:
             "datetime",
             "dry",
             "watered",
-            "photo_path"
+            "dark",
+            "photo_path",
         ]
 
         self.cursor.execute('CREATE TABLE IF NOT EXISTS garden_logs ('
                             '{}, '
-                            '{} BOOLEAN, '
-                            '{} BOOLEAN, '
+                            '{}, '
+                            '{}, '
+                            '{}, '
                             '{} TEXT)'.format(*self.columns))
 
     def __enter__(self):
@@ -42,7 +44,7 @@ class Logs:
     def write(self, **kwargs):
         kwargs['datetime'] = datetime.datetime.now().isoformat()
         data = [kwargs.get(column) for column in self.columns]
-        self.cursor.execute('INSERT INTO garden_logs VALUES (?, ?, ?, ?)', data)
+        self.cursor.execute('INSERT INTO garden_logs VALUES (?, ?, ?, ?, ?)', data)
 
     def get(self, limit=None):
         data = []
@@ -51,23 +53,30 @@ class Logs:
         else:
             query = 'SELECT * from garden_logs'
         for row in self.cursor.execute(query):
-            record = {
-                'datetime': datetime.datetime.strptime(row[0], '%Y-%m-%dT%H:%M:%S.%f'),
-                'dry': bool(row[1]),
-                'watered': bool(row[2]),
-                'photo_path': self.clean_path(row[3])
-            }
+            record = {}
+            for index, header in enumerate(self.columns):
+                if header == 'datetime':
+                    record[header] = datetime.datetime.strptime(row[index], '%Y-%m-%dT%H:%M:%S.%f')
+                elif header == 'photo_path':
+                    record[header] = self.clean_path(row[index])
+                else:
+                    record[header] = self.clean(row[index])
             data.append(record)
         return data
 
     @staticmethod
+    def clean(data):
+        if data is None:
+            return "N/A"
+        else:
+            return bool(data)
+
+    @staticmethod
     def clean_path(photo_path):
-        print(photo_path)
         if photo_path:
-            print('return new path)')
             return photo_path[photo_path.find('/static'):]
         else:
-            return ''
+            return 'N/A'
 
     def get_latest_image(self):
         query = 'SELECT * FROM garden_logs WHERE photo_path IS NOT NULL LIMIT 1'
@@ -136,7 +145,9 @@ def settings_to_cron(settings, cron_file='/etc/cron.d/openGardener'):
     scripts = {
         'camera': os.path.join(BASE_DIR, 'camera.py'),
         'moisture_sensor': os.path.join(BASE_DIR, 'moisture.py'),
-        'pump': os.path.join(BASE_DIR, 'pump.py')
+        'pump': os.path.join(BASE_DIR, 'pump.py'),
+        'light_sensor': os.path.join(BASE_DIR, 'lightsensor.py'),
+        'light': os.path.join(BASE_DIR, 'light.py')
     }
     jobs = []
     for setting in scripts:

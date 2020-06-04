@@ -112,6 +112,129 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
+                    <h1>Light Sensor</h1>
+                </div>
+                <div class="card-body" align="left">
+                    <div class="form-group form-check">
+                        {% if config and config["light_sensor"]["enabled"] %}
+                        <input type="checkbox" class="form-check-input" name="light_sensor.enabled" id="lightSensorEnabled" checked>
+                        {% else %}
+                        <input type="checkbox" class="form-check-input" name="light_sensor.enabled" id="lightSensorEnabled">
+                        {% endif %}
+                        <label class="form-check-label" for="lightEnabled">Enabled</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightFrequency">Frequency</label>
+                        {% if config and config["light_sensor"]["frequency"] %}
+                        <input type="text" class="form-control" value="{{ config["light_sensor"]["frequency"] }}" name="light_sensor.frequency" id="lightSensorFrequency">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="04:15" name="light_sensor.frequency" id="lightSensorFrequency">
+                        {% endif %}
+                        <small class="form-text text-muted">In HH:MM format.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightPin">Sensor Pin</label>
+                        <select class="form-control" name="light_sensor.pin" id="lightSensorPin">
+                            {% if config and config["light_sensor"]["pin"] %}
+                            <option>{{ config["light_sensor"]["pin"] }}</option>
+                            {% endif %}
+                            <option>11</option>
+                            <option>13</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>18</option>
+                            <option>22</option>
+                            <option>29</option>
+                            <option>31</option>
+                            <option>32</option>
+                            <option>33</option>
+                            <option>36</option>
+                            <option>37</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Light</h1>
+                </div>
+                <div class="card-body" align="left">
+                    <div class="form-group form-check">
+                        {% if config and config["light"]["enabled"] %}
+                        <input type="checkbox" class="form-check-input" name="light.enabled" id="lightEnabled" checked>
+                        {% else %}
+                        <input type="checkbox" class="form-check-input" name="light.enabled" id="lightEnabled">
+                        {% endif %}
+                        <label class="form-check-label" for="lightEnabled">Enabled</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightLocation">Location</label>
+                        {% if config and config["light"]["location"] %}
+                        <input type="text" class="form-control" value="{{ config["light"]["location"] }}" name="light.location" id="lightLocation">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="12345" name="light.location" id="lightLocation">
+                        {% endif %}
+                        <small class="form-text text-muted">How often to check status of light, in HH:MM format.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightFrequency">Frequency</label>
+                        {% if config and config["light"]["frequency"] %}
+                        <input type="text" class="form-control" value="{{ config["light"]["frequency"] }}" name="light.frequency" id="lightFrequency">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="00:30" name="light.frequency" id="lightFrequency">
+                        {% endif %}
+                        <small class="form-text text-muted">How often to check status of light, in HH:MM format.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightStart">Start</label>
+                        {% if config and config["light"]["start"] %}
+                        <input type="text" class="form-control" value="{{ config["light"]["start"] }}" name="light.start" id="lightStart">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="sunrise" name="light.start" id="lightStart">
+                        {% endif %}
+                        <small class="form-text text-muted">Either in HH:MM format, or "sunrise"</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightStop">Stop</label>
+                        {% if config and config["light"]["stop"] %}
+                        <input type="text" class="form-control" value="{{ config["light"]["stop"] }}" name="light.stop" id="lightStop">
+                        {% else %}
+                        <input type="text" class="form-control" placeholder="sunset" name="light.stop" id="lightStop">
+                        {% endif %}
+                        <small class="form-text text-muted">Either in HH:MM format, or "sunset"</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="lightPin">Light Pin</label>
+                        <select class="form-control" name="light.pin" id="lightPin">
+                            {% if config and config["light"]["pin"] %}
+                            <option>{{ config["light"]["pin"] }}</option>
+                            {% endif %}
+                            <option>11</option>
+                            <option>13</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>18</option>
+                            <option>22</option>
+                            <option>29</option>
+                            <option>31</option>
+                            <option>32</option>
+                            <option>33</option>
+                            <option>36</option>
+                            <option>37</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:5px;" align="center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
                     <h1>Camera</h1>
                 </div>
                 <div class="card-body" align="left">

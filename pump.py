@@ -11,8 +11,7 @@ import camera
 import RPi.GPIO as GPIO
 
 
-def pump():
-    config = gardentools.get_config()
+def pump(config):
     pin = config['pump']['pin']
     duration = config['pump']['duration']
     GPIO.setup(pin, GPIO.OUT, initial=1)
@@ -26,7 +25,7 @@ def pump():
 def main():
     config = gardentools.get_config()
     GPIO.setmode(GPIO.BOARD)
-    watered = pump()
+    watered = pump(config)
     if config['camera']['enabled'] and config['camera']['frequency'] == 'on pump':
         photo = camera.take_picture()
     else:

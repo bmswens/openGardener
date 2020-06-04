@@ -17,21 +17,20 @@ def home():
     with gardentools.Logs('opengardener.db') as db:
         logs = db.get(5)
         latest_image = db.get_latest_image()
-    height = ''
-    width = ''
+        headers = db.columns
     if not latest_image or latest_image == '/static/img/plant/':
         latest_image = '/static/img/logo.png'
-        width = '400'
-        height = '400'
-    return flask.render_template('home.html', logs=logs, latest_image=latest_image, width=width,
-                                 height=height)
+    return flask.render_template('home.html', logs=logs, latest_image=latest_image,
+                                 headers=headers)
 
 
 @webapp.route('/logs/text')
 def text_logs():
     with gardentools.Logs() as db:
         logs = db.get()
-    return flask.render_template('logs.html', logs=logs)
+        headers = db.columns
+    return flask.render_template('logs.html', logs=logs,
+                                 headers=headers)
 
 
 @webapp.route('/logs/photos')
@@ -61,7 +60,7 @@ def settings():
         if os.path.exists('settings.yml'):
             shutil.move('settings.yml', 'settings.yml.old')
         with open('settings.yml', 'w') as output:
-            output.write(settings_text)
+            output.write(settings_text.lower())
         page = 'success.html'
     config = gardentools.get_config()
     if config and 'camera' in config:
