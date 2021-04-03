@@ -82,4 +82,4 @@ This project is licensed under the GNU GPLv3 - see the [LICENSE.md](LICENSE.md) 
 
 ## Acknowledgments
 
-* My wife, for forcing me to take care of her plants while she's away.
+* My friend, for forcing me to take care of her plants while she's away.
